@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="bmi_fresh"
+        android:label="bmi_cslculator_fresh"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
