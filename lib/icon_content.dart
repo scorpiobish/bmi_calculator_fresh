@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 // ignore: unused_import
 import 'input_page.dart';
-
-
-const labelTextStyle = TextStyle(fontSize: 18, color: Color(0xFF8D8E98));
+// import 'reusable_card.dart';
+import 'constants.dart';
 
 class IconContent extends StatelessWidget {
   // ignore: use_key_in_widget_constructors, prefer_const_constructors_in_immutables

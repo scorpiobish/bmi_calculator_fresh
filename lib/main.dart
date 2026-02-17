@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'input_page.dart';
 
 const double bottomContainerWidth = double.infinity;
-const Color blackColor = Color(0xFF1D1E33);
+const Color blackColor = Color(0xFF141434);
 
 void main() {
   runApp(const BMICalculator());

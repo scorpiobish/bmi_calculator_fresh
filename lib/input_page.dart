@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
+import 'constants.dart';
+enum Gender { male, female }
 
-const double bottomContainerHeight = 80;
-const inactiveCardColor = Color(0xFF111328);
-const Color activeColor = Color.fromARGB(255, 35, 37, 103);
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -16,63 +15,64 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor; 
+  Color maleCardColor = inactiveCardColor;
   Color femaleCardColor = inactiveCardColor;
 
-  void updateColor(int gender) {
-    setState(() {
-      if (gender == 1) {
-        if (maleCardColor == inactiveCardColor) {
-          maleCardColor = activeColor;
-        } else {
-          maleCardColor = inactiveCardColor;
-        }
-      } else if (gender != 1) {
-        if (femaleCardColor == inactiveCardColor) {
-          femaleCardColor = activeColor;
-        } else {
-          femaleCardColor = inactiveCardColor;
-        }
-      }
-    });
-  }
+  Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('BMI Calculator')),
+      backgroundColor: blackColor,
+      appBar: AppBar(
+        backgroundColor: blackColor,
+        title: Center(
+          child: const Text(
+            'BMI CALCULATOR',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.normal,
+            ),
+          ),
+        ),
+      ),
       body: Center(
-        child: Column(
+        child: Column( crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        updateColor(1);
+                    child: ReusableCard(
+                      onPress: () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
                       },
-                      child: ReusableCard(
-                        colour: maleCardColor,
-                        cardChild: Center(
-                          child: IconContent(
-                            icon: FontAwesomeIcons.mars,
-                            label: "MALE",
-                          ),
+                      colour: selectedGender == Gender.male
+                          ? activeColor
+                          : inactiveCardColor,
+                      cardChild: Center(
+                        child: IconContent(
+                          icon: FontAwesomeIcons.mars,
+                          label: "MALE",
                         ),
                       ),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector( onTap: () {
-                        updateColor(2);
+                    child: ReusableCard(onPress: () {
+                      setState(() {selectedGender = Gender.female;
+                        
+                      });
                     },
-                      child: ReusableCard(
-                        colour: femaleCardColor,
-                        cardChild: IconContent(
-                          icon: FontAwesomeIcons.venus,
-                          label: "FEMALE",
-                        ),
+                      colour: selectedGender == Gender.female
+                          ? activeColor
+                          : inactiveCardColor,
+                      cardChild: IconContent(
+                        icon: FontAwesomeIcons.venus,
+                        label: "FEMALE",
                       ),
                     ),
                   ),
@@ -80,17 +80,41 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Expanded(
-              child: ReusableCard(
-                colour: activeColor,
-                cardChild: IconContent(label: 'HEIGHT'),
+              child: ReusableCard(onPress: () {
+                
+              },
+                colour: inactiveCardColor,
+                cardChild: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconContent(label: 'HEIGHT'), Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: const [
+                        Text(
+                          '180',
+                          style: numberTextStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: TextStyle(fontSize: 18, color: Color(0xFF8D8E98)),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child: ReusableCard(colour: activeColor)),
+                  Expanded(child: ReusableCard(onPress: () {
+                
+              },colour: inactiveCardColor)),
                   // ignore: prefer_const_constructors
-                  Expanded(child: ReusableCard(colour: activeColor)),
+                  Expanded(child: ReusableCard(onPress: () {
+                
+              },colour: inactiveCardColor)),
                 ],
               ),
             ),
